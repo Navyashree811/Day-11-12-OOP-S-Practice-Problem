@@ -1,5 +1,5 @@
 /*
- * Q.1 : Stock Account Management
+ * Q.2 : Stock Account Management
  */
 package com.bridgelabz.oopspracticeproblem;
 
@@ -7,17 +7,22 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StockPortfolio {
+	static double totalStockValue = 0;
 	Scanner scanner = new Scanner(System.in);
 	ArrayList<Stock> stocks = new ArrayList<>();
+	Account account = new Account();
 
 	public static void main(String[] args) {
 
 		StockPortfolio stockPF = new StockPortfolio();
+
+		stockPF.addBalance();
 		stockPF.stockCalculator();
+		stockPF.buyStocks();
 	}
 
 	public void stockCalculator() {
-		double totalStockValue = 0;
+		totalStockValue = 0;
 		System.out.println("Enter how many companies Stocks do you want to buy : ");
 		int company = scanner.nextInt();
 		scanner.nextLine();
@@ -40,4 +45,27 @@ public class StockPortfolio {
 		System.out.println("Your total value of all the stocks is : " + totalStockValue + "Rs");
 	}
 
+	public void addBalance() {
+		System.out.println("Enter the amount you want to deposite to your account : ");
+		account.setBalance(scanner.nextDouble());
+		scanner.nextLine();
+		System.out.println("Your account balance is : " + account.getBalance());
+
+	}
+
+	public void buyStocks() {
+		System.out.println("Press 1 to buy the Stocks : ");
+		System.out.println("Press 2 to cancel the transaction : ");
+		int choice = scanner.nextInt();
+		scanner.nextLine();
+
+		switch (choice) {
+		case 1:
+			account.debit(totalStockValue);
+			break;
+		case 2:
+			System.out.println("Transaction Cancelled.");
+			break;
+		}
+	}
 }
